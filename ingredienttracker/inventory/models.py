@@ -1,3 +1,25 @@
 from django.db import models
 
-# Create your models here.
+class Inventory(models.Model):
+    name = models.CharField(max_length=30)
+    quantity = models.IntegerField()
+    entry_date = models.DateTimeField(auto_now_add=True)
+    expiry_date = models.DateTimeField()
+
+class Recipes(models.Model):
+    class FoodCategory(models.TextChoices):
+        Breakfast = "Breakfast"
+        Lunch = "Lunch"
+        Dinner = "Dinner"
+        Snack = "Snack"
+    name = models.CharField(max_length=30)
+    ingredients = models.ForeignKey(Inventory,on_delete=models.PROTECT)
+    servings = models.IntegerField()
+    food_category = models.CharField(choices=FoodCategory.choices,max_length=20)
+
+
+
+ 
+
+
+
