@@ -1,0 +1,18 @@
+<h1>Inventory</h1>
+<u1>
+    <div style="border: 2px solid #000;">
+{% for inventory in object_list %}
+    <li> {{inventory.name}}: {{inventory.quantity}}
+        <br>Entry date: {{inventory.entry_date}}
+        <br>Expiry date: {{inventory.expiry_date}}
+    </li>
+{% empty %}
+    <li>No inventory yet.</li>
+{% endfor %}
+    </div>
+</u1>
+<f1>
+    <div style="border: 2px solid #000;">
+        <h3> </h3>
+    </div>
+</f1>
