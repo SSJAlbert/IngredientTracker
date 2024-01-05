@@ -2,7 +2,7 @@
 <u1>
     <div style="border: 2px solid #000;">
 {% for inventory in object_list %}
-    <li> {{inventory.name}}: {{inventory.quantity}}
+    <li> {{inventory.name.title}}: {{inventory.quantity}}
         <br>Entry date: {{inventory.entry_date}}
         <br>Expiry date: {{inventory.expiry_date}}
     </li>

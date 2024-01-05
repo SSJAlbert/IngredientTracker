@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView
 from django.db import models
 from django.urls import reverse_lazy
 
-from inventory.models import Inventory
+from inventory.models import Inventory, Recipes
 
 def home_screen_view(request):
 
@@ -38,6 +38,17 @@ class InventoryListView(ListView):
         context["now"] = timezone.now()
         return context
     
+class RecipesListView(ListView):
+    model = Recipes
+    paginate_by = 20
+
+    template_name = 'recipes_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["now"] = timezone.now()
+        return context
+    
 
 class InventoryCreateView(CreateView):
     model = Inventory
@@ -51,13 +62,29 @@ class InventoryCreateView(CreateView):
          self.request = request
          return super().dispatch(request, *args, **kwargs)
 
-
-
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.entry_date = models.DateTimeField(auto_now_add=True)
         obj.save()
         return super().form_valid(form)
+    
+class RecipesCreateView(CreateView):
+    model = Recipes
+    paginate_by = 20
+    fields = ['name','ingredients','servings','food_category']
+    success_url = reverse_lazy("recipes-list")
+
+    template_name = 'recipes_create.html'
+
+    def dispatch(self, request, *args, **kwargs):
+         self.request = request
+         return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.save()
+        return super().form_valid(form)
+
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)

@@ -1,0 +1,19 @@
+<h1>Recipes</h1>
+<u1>
+    <div style="border: 2px solid #000;">
+{% for recipes in object_list %}
+    <li> {{recipes.name.title}}:
+        <br> {{recipes.ingredients.name.title}}
+        <br>Servings: {{recipes.servings}}
+        <br>Food Category: {{recipes.food_category}}
+    </li>
+{% empty %}
+    <li>No recipes yet.</li>
+{% endfor %}
+    </div>
+</u1>
+<f1>
+    <div style="border: 2px solid #000;">
+        <h3> </h3>
+    </div>
+</f1>
